@@ -2,20 +2,18 @@ import React from 'react';
 import * as BooksAPI from "../BooksAPI";
 import { update } from '../BooksAPI';
 import PropTypes from "prop-types";
+import HomePage from './HomePage';
 
-const Book = (props) => {
-  console.log(props);
-  //console.log(props.currentlReading[0].title);
-  //example
-  const firstTitle = props.currentlReading[0];
-  console.log(firstTitle['title']);
-    
+
+const Book = ({book, shelf, title, authors, updateBookToShelf}) => {
+  console.log(book);
+
   const handleChange= async (e) =>{
-    const shelf= e.target.value;
-    const book= props;
-    const result= await update(book, shelf);
-    props.moveBook(book, shelf);
+ 
+    const result= await update(book, e.target.value);
+  
   }
+ 
     return (
         <li>
           <div className="book">
@@ -26,11 +24,13 @@ const Book = (props) => {
                   width: 128,
                   height: 193,
                   backgroundImage:
-                    'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")',
+                    'url("{book.imageLinks.thumbnail}")',
                 }}
-              ></div>
+              >
+
+              </div>
               <div className="book-shelf-changer">
-                <select onChange={handleChange}>
+                <select defaultValue={shelf} onChange={(e) => updateBookToShelf(book, e.target.value)}>
                   <option value="none" disabled>
                     Move to...
                   </option>
@@ -43,8 +43,8 @@ const Book = (props) => {
                 </select>
               </div>
             </div>
-            <div className="book-title">{firstTitle['title']}</div>
-            <div className="book-authors">Harper Lee</div>
+            <div className="book-title">{book.title}</div>
+            <div className="book-authors">{book.authors}</div>
           </div>
         </li>
     );
