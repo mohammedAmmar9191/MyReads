@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import HomePage from './HomePage';
 
 
-const Book = ({book, shelf, title, authors, updateBookToShelf}) => {
+const Book = ({book, shelf, updateBookToShelf}) => {
   console.log(book);
 
   const handleChange= async (e) =>{
@@ -24,14 +24,14 @@ const Book = ({book, shelf, title, authors, updateBookToShelf}) => {
                   width: 128,
                   height: 193,
                   backgroundImage:
-                    'url("{book.imageLinks.thumbnail}")',
+                  `url("${book.imageLinks.thumbnail}")`,
                 }}
               >
 
               </div>
               <div className="book-shelf-changer">
-                <select defaultValue={shelf} onChange={(e) => updateBookToShelf(book, e.target.value)}>
-                  <option value="none" disabled>
+                <select defaultValue={book.shelf? book.shelf : "none"} onChange={(e) => updateBookToShelf(book, e.target.value)}>
+                  <option value="move" disabled>
                     Move to...
                   </option>
                   <option value="currentlyReading">

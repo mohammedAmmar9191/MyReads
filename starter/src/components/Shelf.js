@@ -16,7 +16,7 @@ import HomePage from './HomePage';
       <ol className="books-grid" >
       {books.map(bk =>(
         <li key={bk.id}>
-        <Book  book={bk} updateBookToShelf={updateBookToShelf  } />
+        <Book  book={bk} updateBookToShelf={updateBookToShelf } />
         </li>
       ))}
   
