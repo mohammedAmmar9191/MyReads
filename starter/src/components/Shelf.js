@@ -7,6 +7,10 @@ import HomePage from './HomePage';
 
  const Shelf=({books, title, shelf,book, updateBookToShelf})=> {
    console.log(books);
+   console.log(updateBookToShelf);
+   function updateBookToShelef() {
+     console.log("ada");
+   }
    
     
   return (
@@ -16,7 +20,7 @@ import HomePage from './HomePage';
       <ol className="books-grid" >
       {books.map(bk =>(
         <li key={bk.id}>
-        <Book  book={bk} updateBookToShelf={updateBookToShelf } />
+        <Book  book={bk} updateBookToShelf={updateBookToShelf} updateBookToShelef={updateBookToShelef}/>
         </li>
       ))}
   

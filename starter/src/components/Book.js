@@ -3,16 +3,15 @@ import * as BooksAPI from "../BooksAPI";
 import { update } from '../BooksAPI';
 import PropTypes from "prop-types";
 import HomePage from './HomePage';
+import props from "react";
 
 
-const Book = ({book, shelf, updateBookToShelf}) => {
-  console.log(book);
-
-  const handleChange= async (e) =>{
- 
-    const result= await update(book, e.target.value);
+const Book = ({book, updateBookToShelf}, updateBookToShelef) => {
+  //console.log(updateBookToShelf);
+  //function updateBookToShelf(e) {
+    //console.log(e);
+  //}
   
-  }
  
     return (
         <li>
@@ -51,9 +50,7 @@ const Book = ({book, shelf, updateBookToShelf}) => {
 }
 
 Book.propTypes = {
-  book: PropTypes.object.isRequired,
-  bookSize: PropTypes.string.isRequired,
-  updateBookToShelf: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired
 };
 
 export default Book;

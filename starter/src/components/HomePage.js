@@ -4,40 +4,17 @@ import MyReadsTitle from "./MyReadsTitle";
 import Button from "./Button";
 import { useState, useEffect } from "react";
 import * as BooksAPI from "../BooksAPI";
-import BookProvider from "./BookContext";
-import props from "react";
+import PropTypes from "prop-types";
 
 
-const HomePage = (props) => {
-  const [books, setAllBooks] = useState([]);
-
-  useEffect(()=>{
-    const getBooks= async ()=>{
-     const books = await BooksAPI.getAll();
-      setAllBooks(books);
-      console.log(books);
-    }; 
-    getBooks();
-  },[]);
-
-const updateBookToShelf = (book, moveTo)=>{
-  const updatedBooks= books.map(bk =>{
-    if (bk.id===book.id) {
-    book.shelf=moveTo;
-    return book;
-  }
-  return bk;
-  })
-  setAllBooks(updatedBooks);
-  BooksAPI.update(book, moveTo);
-}
-
-   const currentlyReading = books.filter(book => book.shelf === "currentlyReading");
-   const wantToRead = books.filter(book => book.shelf === "wantToRead");
-   const read = books.filter(book => book.shelf === "read");
+const HomePage = (books, updateBookToShelf) => {
+  console.log(books);
+  console.log(typeof updateBookToShelf);
+  console.log(updateBookToShelf);
+   const currentlyReading = books.books.filter(book => book.shelf === "currentlyReading");
+   const wantToRead = books.books.filter(book => book.shelf === "wantToRead");
+   const read = books.books.filter(book => book.shelf === "read");
   
-
-
     return (
       <div className="list-books">
         <MyReadsTitle />
@@ -52,4 +29,9 @@ const updateBookToShelf = (book, moveTo)=>{
     );
 };
 
+
+HomePage.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateBookToShelf: PropTypes.func.isRequired,
+};
 export default HomePage;
